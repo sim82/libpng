@@ -50,14 +50,7 @@ include(GNUInstallDirs)
 
 # needed packages
 
-# Allow users to specify location of Zlib.
-# Useful if zlib is being built alongside this as a sub-project.
-option(PNG_BUILD_ZLIB "Custom zlib Location, else find_package is used" OFF)
-
-if(NOT PNG_BUILD_ZLIB)
-  find_package(ZLIB REQUIRED)
-  include_directories(${ZLIB_INCLUDE_DIR})
-endif()
+find_package(Zlib)
 
 option(PNG_HARDWARE_OPTIMIZATIONS "Enable hardware optimizations" ON)
 
@@ -291,7 +284,7 @@ target_include_directories(png PUBLIC
   $<INSTALL_INTERFACE:>
 )
 set_target_properties(png PROPERTIES OUTPUT_NAME "png")
-
+target_link_libraries(png Zlib::zlib)
 if(PNG_DEBUG)
     target_compile_definitions(png -DPNG_DEBUG)
 endif()
