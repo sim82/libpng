@@ -282,27 +282,27 @@ set(libpng_sources
 
 # NOW BUILD OUR TARGET
 
-add_library(PNG ${libpng_sources})
+add_library(png ${libpng_sources})
 
 #target_include_directories(png PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} )
 
-target_include_directories(PNG PUBLIC
+target_include_directories(png PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   $<INSTALL_INTERFACE:>
 )
-set_target_properties(PNG PROPERTIES OUTPUT_NAME "png")
+set_target_properties(png PROPERTIES OUTPUT_NAME "png")
 
 if(PNG_DEBUG)
-    target_compile_definitions(PNG -DPNG_DEBUG)
+    target_compile_definitions(png -DPNG_DEBUG)
 endif()
 
 unset(PNG_LIB_TARGETS)
 
 
 install(TARGETS
-      PNG
+      png
   EXPORT
-      PNGTargets
+      LibpngTargets
       RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
       LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
       ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -311,33 +311,33 @@ install(TARGETS
 install(FILES ${libpng_public_hdrs} DESTINATION include)
 
 
-set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/PNG)
+set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/Libpng)
 
 
-install(EXPORT PNGTargets
-    FILE PNGTargets.cmake
-    NAMESPACE PNG::
+install(EXPORT LibpngTargets
+    FILE LibpngTargets.cmake
+    NAMESPACE Libpng::
     DESTINATION ${INSTALL_CONFIGDIR}
 )
 
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
-    ${CMAKE_CURRENT_BINARY_DIR}/PNGVersion.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/LibpngVersion.cmake
     VERSION 0.0.0
     COMPATIBILITY AnyNewerVersion
 )
 
 configure_package_config_file(
-    ${CMAKE_CURRENT_LIST_DIR}/cmake/PNGConfig.cmake.in
-    ${CMAKE_CURRENT_BINARY_DIR}/PNGConfig.cmake
+    ${CMAKE_CURRENT_LIST_DIR}/cmake/LibpngConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/LibpngConfig.cmake
     INSTALL_DESTINATION ${INSTALL_CONFIGDIR}
 )
 
 ## Install all the helper files
 install(
     FILES
-      ${CMAKE_CURRENT_BINARY_DIR}/PNGConfig.cmake
-      ${CMAKE_CURRENT_BINARY_DIR}/PNGVersion.cmake
+      ${CMAKE_CURRENT_BINARY_DIR}/LibpngConfig.cmake
+      ${CMAKE_CURRENT_BINARY_DIR}/LibpngVersion.cmake
     DESTINATION ${INSTALL_CONFIGDIR}
 )
