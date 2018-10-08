@@ -281,6 +281,7 @@ add_library(png ${libpng_sources})
 
 target_include_directories(png PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
   $<INSTALL_INTERFACE:include>
 )
 set_target_properties(png PROPERTIES OUTPUT_NAME "png")
