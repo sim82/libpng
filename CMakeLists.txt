@@ -50,7 +50,7 @@ include(GNUInstallDirs)
 
 # needed packages
 
-find_package(Zlib)
+find_package(Zlib CONFIG) # force config to prevent clash with cmake supplied ZLIB on win32
 
 option(PNG_HARDWARE_OPTIMIZATIONS "Enable hardware optimizations" ON)
 
